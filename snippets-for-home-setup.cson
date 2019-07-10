@@ -1,0 +1,120 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+
+'.source.js':
+  'react-component':
+    'prefix': 'component'
+    'body':
+      """
+      import React from 'react';
+
+      class $1 extends React.Component {
+        render() {
+          return null;
+        }
+      }
+      $1.propTypes = {
+        $2
+      };
+      export default $1;
+      """
+
+
+  'react-component-func':
+    'prefix': 'component-func'
+    'body':
+      """
+      import React from 'react';
+
+      const $1 = () => {
+        return null;
+      }
+
+      export default $1;
+      """
+
+
+
+  'reactnative-func-component':
+    'prefix': 'native-func'
+    'body':
+      """
+      import React from "react";
+      import { Text, View } from "react-native";
+
+      const $1 = () => {
+        const { textStyle, viewStyle } = styles;
+
+        return (
+          <View style={viewStyle}>
+            <Text style={textStyle}>$1</Text>
+          </View>
+        );
+      };
+
+      const styles = {
+        viewStyle: {
+          backgroundColor: "#F8F8F8",
+          justifyContent: "center", //up-down
+          alignItems: "center", //left-right
+          height: 60,
+          paddingTop: 15,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.2, //bigger number means darker
+          elevation: 10, //hack for no shadow appearing
+          position: "relative"
+        },
+        textStyle: {
+          fontSize: 20
+        }
+      };
+
+      export default $1;
+      //remove if not index.js
+      AppRegistry.registerComponent("name-of-project", () => App);
+      """
+
+
+
+  'reactnative-class-component':
+    'prefix': 'native-class'
+    'body':
+      """
+      import React, { Component } from "react";
+      import { Text, View } from "react-native";
+
+      class $1 extends Component {
+        render() {
+          return (
+            <View>
+              <Text>$1</Text>
+            </View>
+          );
+        }
+      }
+
+      export default $1;
+
+      //remove if not index.js
+      AppRegistry.registerComponent("name-of-project", () => App);
+      """
