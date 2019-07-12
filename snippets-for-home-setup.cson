@@ -90,8 +90,6 @@
       };
 
       export default $1;
-      //remove if not index.js
-      AppRegistry.registerComponent("name-of-project", () => App);
       """
 
 
@@ -114,7 +112,5 @@
       }
 
       export default $1;
-
-      //remove if not index.js
-      AppRegistry.registerComponent("name-of-project", () => App);
       """
+
