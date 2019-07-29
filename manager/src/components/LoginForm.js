@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { Text, View } from "react-native";
-import { connect } from "react-redux";
-import { Card, CardSection, Input, Button } from "./common";
-import { emailChanged, passwordChanged, loginUser } from "../actions";
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import {
+  Card, CardSection, Input, Button, Spinner
+} from './common';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 class LoginForm extends Component {
-  onEmailChange = text => {
+  onEmailChange = (text) => {
     this.props.emailChanged(text);
   };
 
-  onPasswordChange = text => {
+  onPasswordChange = (text) => {
     this.props.passwordChanged(text);
   };
 
@@ -24,13 +26,24 @@ class LoginForm extends Component {
       return (
         <View
           style={{
-            backgroundColor: "white"
+            backgroundColor: 'white'
           }}
         >
           <Text style={styles.errorTextStyle}>{this.props.error}</Text>
         </View>
       );
     }
+  }
+
+  renderButton=() => {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+
+    return (
+      <Button onPress={this.onButtonPress}>Login</Button>
+
+    );
   }
 
   render() {
@@ -59,7 +72,7 @@ class LoginForm extends Component {
         {this.renderError()}
 
         <CardSection>
-          <Button onPress={this.onButtonPress}>Login</Button>
+          {this.renderButton()}
         </CardSection>
       </Card>
     );
@@ -68,19 +81,20 @@ class LoginForm extends Component {
 const styles = {
   errorTextStyle: {
     fontSize: 20,
-    alignSelf: "center",
-    color: "red"
+    alignSelf: 'center',
+    color: 'red'
   }
 };
 
-const mapStateToProps = state => {
-  // console.log("test", this);
+const mapStateToProps = ({ auth }) => {
+  const {
+    email, password, error, loading
+  } = auth;
   return {
-    email: state.auth.email,
-    password: state.auth.password,
-    error: state.auth.error
+    email, password, error, loading
   };
 };
+
 
 export default connect(
   mapStateToProps,
